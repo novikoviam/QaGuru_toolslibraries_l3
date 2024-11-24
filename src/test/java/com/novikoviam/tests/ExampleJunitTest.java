@@ -1,4 +1,4 @@
-package com.novikoviam;
+package com.novikoviam.tests;
 
 import org.junit.jupiter.api.*;
 

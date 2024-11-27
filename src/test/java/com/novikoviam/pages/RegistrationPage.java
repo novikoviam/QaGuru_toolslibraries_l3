@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.novikoviam.pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -15,6 +14,9 @@ public class RegistrationPage {
             genderWrapper = $("#genterWrapper"),
             userNumberInput = $("#userNumber"),
             userAddress = $("#currentAddress"),
+            userHobbies = $("#hobbiesWrapper"),
+            uploadPicture = $("#uploadPicture"),
+            subjectsInput = $("#subjectsInput"),
             calendarInput = $("#dateOfBirthInput");
 
 
@@ -73,10 +75,29 @@ public class RegistrationPage {
 
     }
 
+    public RegistrationPage setHobbiesWrapper(String value) {
+        userHobbies.$("#hobbiesWrapper").$(byText("Sports")).click();
+
+        return this;
+    }
+
+    public RegistrationPage setPicture() {
+        uploadPicture.$("#uploadPicture").uploadFromClasspath("img/1.png");
+
+        return this;
+    }
+
+    public RegistrationPage setSubject(String value){
+        subjectsInput.$("#subjectsInput").setValue(value).pressEnter();
+
+        return this;
+    }
+
     public RegistrationPage checkResult(String key, String value) {
         $(".table-responsive").$(byText(key)).parent()
                 .shouldHave(text(value));
 
         return this;
     }
+
 }

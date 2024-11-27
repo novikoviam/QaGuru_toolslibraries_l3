@@ -22,11 +22,17 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setGender("Other")
                 .setUserNumber("1234567890")
                 .setDateOfBirth("30", "July", "2008")
-                .setCurrentAddress("Saint-Petersburg");
+                .setCurrentAddress("Saint-Petersburg")
+                .setHobbiesWrapper("Sports")
+                .setSubject("Math")
+                .setPicture();
 
-        $("#subjectsInput").setValue("Math").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("img/1.png");
+
+
+
+       // $("#subjectsInput").setValue("Math").pressEnter();
+       // $("#hobbiesWrapper").$(byText("Sports")).click();
+       // $("#uploadPicture").uploadFromClasspath("img/1.png");
        // $("#currentAddress").setValue("Some address 1");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();

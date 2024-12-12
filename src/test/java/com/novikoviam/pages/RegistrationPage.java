@@ -4,20 +4,29 @@ import com.codeborne.selenide.SelenideElement;
 import com.novikoviam.pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.by;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationPage {
-    private SelenideElement firstNameInput = $("#firstName"),
+    private final SelenideElement
+            firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
             genderWrapper = $("#genterWrapper"),
             userNumberInput = $("#userNumber"),
-            userAddress = $("#currentAddress"),
+            calendarInput = $("#dateOfBirthInput"),
+            subjectsInput = $("#subjectsInput"),
             userHobbies = $("#hobbiesWrapper"),
             uploadPicture = $("#uploadPicture"),
-            subjectsInput = $("#subjectsInput"),
-            calendarInput = $("#dateOfBirthInput");
+            userAddress = $("#currentAddress"),
+            stateCityWrapper = $("#stateCity-wrapper"),
+            setState = $("#state"),
+            setCity = $("#city");
+    /*
+    submit = $("#submit"),
+    modalContentElement = $(".modal-content"),
+    exampleModalSizes = $("#example-modal-sizes-title-lg");*/
 
 
     CalendarComponent calendarComponent = new CalendarComponent();
@@ -100,4 +109,17 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage setState(String state) {
+        stateCityWrapper.$(byText("NCR")).click();
+        setState.$("#state").setValue(state).pressEnter();
+
+        return this;
+    }
+
+    public RegistrationPage setCity(String city) {
+        stateCityWrapper.$(byText("Delhi")).click();
+        setCity.$("#city").setValue(city);
+
+        return this;
+    }
 }

@@ -1,6 +1,6 @@
 package com.novikoviam.tests;
 
-import com.novikoviam.tests.TestBase;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -8,18 +8,27 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationTests extends TestBase {
+public class RegistrationTestsWithFaker extends TestBase {
 
     @Test
     void successfulRegistrationTest() {
+
+        Faker faker = new Faker();
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+        String number = String.valueOf(faker.phoneNumber());
+
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
 
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Egorov");
-        $("#userEmail").setValue("alex@egorov.com");
+        $("#firstName").setValue("firstname");
+        $("#lastName").setValue("lastname");
+        $("#userEmail").setValue("email");
         $("#genterWrapper").$(byText("Other")).click();
         $("#userNumber").setValue("1234567890");
         $("#dateOfBirthInput").click();

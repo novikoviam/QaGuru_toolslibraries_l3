@@ -3,8 +3,9 @@ package com.novikoviam.pages;
 import com.codeborne.selenide.SelenideElement;
 import com.novikoviam.pages.components.CalendarComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.by;
+import javax.swing.*;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -16,13 +17,21 @@ public class RegistrationPage {
             genderWrapper = $("#genterWrapper"),
             userNumberInput = $("#userNumber"),
             calendarInput = $("#dateOfBirthInput"),
+            subjectFormOpen= $("#subjectsContainer"),
             subjectsInput = $("#subjectsInput"),
             userHobbies = $("#hobbiesWrapper"),
             uploadPicture = $("#uploadPicture"),
             userAddress = $("#currentAddress"),
             stateCityWrapper = $("#stateCity-wrapper"),
-            setState = $("#state"),
-            setCity = $("#city");
+            inputState = $("#state"),
+            inputCity = $("#city"),
+            submitForm = $("#submit"),
+            modalContent = $("#modal-content"),
+            modalHeader = $("#example-modal-sizes-title-lg");
+
+
+
+
     /*
     submit = $("#submit"),
     modalContentElement = $(".modal-content"),
@@ -85,23 +94,65 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobbiesWrapper(String value) {
-        userHobbies.$("#hobbiesWrapper").$(byText("Sports")).click();
+        userHobbies.$(byText(value)).click();
 
         return this;
     }
 
     public RegistrationPage setPicture() {
-        uploadPicture.$("#uploadPicture").uploadFromClasspath("img/1.png");
+        uploadPicture.uploadFromClasspath("img/1.png");
 
         return this;
     }
 
-    public RegistrationPage setSubject(String value){
-        subjectsInput.$("#subjectsInput").setValue(value).pressEnter();
+    public RegistrationPage setSubject(String subject){
+        subjectFormOpen.click();
+        subjectsInput.setValue(subject).pressEnter();
 
         return this;
     }
 
+/*    public RegistrationPage checkResult(String key, String value) {
+        $(".table-responsive").$(byText(key)).parent()
+                .shouldHave(text(value));
+
+        return this;
+    }*/
+
+    public RegistrationPage setState(String state) {
+
+/*        stateCityWrapper.$(byText(state)).click();
+        setState.setValue(state).pressEnter();*/
+
+        inputState.click();
+        stateCityWrapper.$(byText(state)).click();
+
+        return this;
+    }
+
+    public RegistrationPage setCity(String city) {
+
+/*        stateCityWrapper.$(byText(city)).click();
+        setCity.setValue(city).pressEnter();*/
+
+        inputCity.click();
+        stateCityWrapper.$(byText(city)).click();
+
+
+        return this;
+    }
+
+    public void submit(){
+        submitForm.click();
+
+    }
+
+    public RegistrationPage dialog() {
+        modalContent.should(appear);
+        modalHeader.shouldHave(text("Thanks for submitting the form"));
+
+        return this;
+    }
     public RegistrationPage checkResult(String key, String value) {
         $(".table-responsive").$(byText(key)).parent()
                 .shouldHave(text(value));
@@ -109,17 +160,5 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setState(String state) {
-        stateCityWrapper.$(byText("NCR")).click();
-        setState.$("#state").setValue(state).pressEnter();
 
-        return this;
-    }
-
-    public RegistrationPage setCity(String city) {
-        stateCityWrapper.$(byText("Delhi")).click();
-        setCity.$("#city").setValue(city);
-
-        return this;
-    }
 }

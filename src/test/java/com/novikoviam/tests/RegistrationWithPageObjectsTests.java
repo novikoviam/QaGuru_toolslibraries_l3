@@ -23,10 +23,12 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setUserNumber("1234567890")
                 .setDateOfBirth("30", "July", "2008")
                 .setCurrentAddress("Saint-Petersburg")
-                .setState("Uttar Pradesh")
                 .setHobbiesWrapper("Sports")
+               // .setPicture()
                 .setSubject("Math")
-                .setPicture();
+                .setState("NCR")
+                .setCity("Delhi")
+                .submit();
 
 
 
